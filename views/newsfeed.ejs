@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News Feed</title>
+    <link href="/src/stylesheets/output.css" rel="stylesheet" />
+  </head>
+  <body
+    class="h-full bg-gradient-to-tr from-blue-500 to-orange-500 text-white flex flex-col overflow-hidden"
+  >
+    <!-- Navbar for mobile -->
+    <nav
+      class="fixed bottom-0 left-0 right-0 bg-gray-800 p-2 shadow-lg md:hidden"
+    >
+      <div class="flex justify-around">
+        <a href="/home" class="text-white">Home</a>
+        <a href="/newsfeed" class="text-white">News Feed</a>
+        <a href="#" class="text-white">Profile</a>
+        <a href="#" class="text-white">Setting</a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div
+      class="h-screen container mx-auto p-4 flex-1 flex flex-col md:flex-row md:space-x-4"
+    >
+      <!-- Profile Panel -->
+      <aside class="bg-gray-900 p-4 rounded-lg shadow-lg w-full md:w-1/4">
+        <div class="flex items-center space-x-4 mb-4">
+          <img
+            src="/src/images/uploads/<%= user.profile %>"
+            alt="User Avatar"
+            class="rounded-full h-8"
+          />
+          <div>
+            <h2 class="font-semibold text-xl"><%= user.username %></h2>
+            <p class="text-gray-400">Welcome back!</p>
+          </div>
+        </div>
+        <a
+          href="/logout"
+          class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700"
+          >Logout</a
+        >
+        <nav class="mt-4">
+          <ul class="space-y-2">
+            <li><a href="#" class="text-blue-400">Settings</a></li>
+            <li><a href="/home" class="text-blue-400">Home</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="bg-gray-900 p-6 rounded-lg shadow-md flex-1">
+        <!-- User Posts -->
+        <div class="space-y-4">
+          <% posts.forEach(post => { %>
+          <div class="bg-gray-800 p-4 rounded-lg shadow">
+            <div class="flex items-center space-x-4 mb-2">
+              <img
+                src="/src/images/uploads/<%= post.user.profile %>"
+                alt="User Avatar"
+                class="rounded-full h-8"
+              />
+              <div>
+                <h2 class="font-semibold text-lg"><%= post.user.username %></h2>
+                <span class="text-gray-400 text-sm"><%= post.date %></span>
+              </div>
+            </div>
+            <h3 class="font-semibold text-xl mb-2"><%= post.title %></h3>
+            <p class="text-gray-200 mb-4"><%= post.content %></p>
+            <div class="flex justify-end space-x-4 text-blue-400">
+              <a href="/like/<%= post._id %>/newsfeed"
+                >Like (<%= post.likes.length %>)</a
+              >
+              <a href="/comments/<%= post._id %>">Comment</a>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

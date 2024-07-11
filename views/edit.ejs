@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/src/stylesheets/output.css" rel="stylesheet" />
+    <title>Edit Post</title>
+  </head>
+  <body
+    class="h-screen bg-gradient-to-tr from-blue-50 to-orange-500 text-white flex justify-center items-center"
+  >
+    <main class="bg-gray-800 p-4 rounded-none shadow-md md:rounded-lg">
+      <form class="mb-4" action="/updatepost/<%= post._id  %>" method="post">
+        <div class="mb-2">
+          <label for="title" class="block text-gray-400">Title</label>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            value="<%= post.title %>"
+            class="w-full p-2 border rounded bg-gray-700 text-white"
+          />
+        </div>
+        <div class="mb-2">
+          <label for="message" class="block text-gray-400">Message</label>
+          <textarea
+            id="message"
+            rows="4"
+            name="message"
+            class="resize-none w-full p-2 border rounded bg-gray-700 text-white"
+          >
+<%= post.content %></textarea
+          >
+        </div>
+        <button
+          type="submit"
+          class="bg-yellow-400 text-black px-4 py-2 rounded"
+        >
+          Update
+        </button>
+      </form>
+    </main>
+  </body>
+</html>
